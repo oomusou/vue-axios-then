@@ -9,22 +9,14 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapState } from 'vuex';
+import store from '../store';
 
-const url = 'https://jsonplaceholder.typicode.com/todos';
-
-const saveTodos = vm => res => vm.todos = res.data.slice(0, 3);
-
-const mounted = function() {
-  axios.get(url)
-    .then(saveTodos(this));
-};
+const mounted = () => store.dispatch('getTodos');
 
 export default {
   name: 'HelloWorld',
-  data: () => ({
-    todos: [],
-  }),
+  computed: mapState(['todos']),
   mounted,
 };
 </script>
